@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Care | Student Help Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="brand-icon">✦</span> Campus Care</a><span class="top-note">STUDENT SUPPORT PORTAL</span><button id="logoutBtn" class="btn btn-quiet hidden">Log out</button></header>
+<main class="shell">
+<section id="authView" class="auth-layout">
+  <div class="hero-copy"><span class="eyebrow">YOUR CAMPUS, BETTER SUPPORTED</span><h1>Small problems.<br><span>Easy solutions.</span></h1><p>Report a campus issue, follow its progress, and get back to what matters.</p><div class="hero-points"><span>✓ Simple issue reporting</span><span>✓ Track every request</span><span>✓ Support in one place</span></div></div>
+  <div class="panel auth-panel"><div class="tabs"><button class="tab active" data-tab="login">Login</button><button class="tab" data-tab="signup">Create account</button></div>
+    <form id="loginForm" class="auth-form"><h2>Welcome back</h2><p class="muted">Log in to view your support requests.</p><label>Email<input name="email" type="email" placeholder="you@college.edu" required></label><label>Password<input name="password" type="password" placeholder="At least 8 characters" required></label><button class="btn btn-primary full">Login to Campus Care</button></form>
+    <form id="signupForm" class="auth-form hidden"><h2>Create your account</h2><p class="muted">It takes less than a minute.</p><label>Full name<input name="name" placeholder="Your name" required minlength="2"></label><label>Email<input name="email" type="email" placeholder="you@college.edu" required></label><label>Password<input name="password" type="password" placeholder="At least 8 characters" required minlength="8"></label><button class="btn btn-primary full">Create account</button></form>
+    <div id="authMessage" class="message"></div>
+  </div>
+</section>
+<section id="appView" class="hidden">
+  <div class="welcome-row"><div><span class="eyebrow">STUDENT DASHBOARD</span><h1>Hello, <span id="studentName">Student</span> 👋</h1><p class="muted">What can we help you with today?</p></div><button id="newTicketBtn" class="btn btn-primary">＋ Report an issue</button></div>
+  <div class="stats"><div class="stat-card"><span class="stat-label">TOTAL REQUESTS</span><strong id="totalCount">0</strong></div><div class="stat-card"><span class="stat-label">OPEN</span><strong id="openCount">0</strong></div><div class="stat-card"><span class="stat-label">RESOLVED</span><strong id="resolvedCount">0</strong></div></div>
+  <div class="content-grid">
+    <section class="panel tickets-panel"><div class="section-head"><div><h2>Your requests</h2><p class="muted">A live view of your submitted issues.</p></div><select id="statusFilter"><option value="">All statuses</option><option value="open">Open</option><option value="in_progress">In progress</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select></div><div id="ticketList" class="ticket-list"><div class="empty">Loading your requests…</div></div></section>
+    <aside class="side-stack"><section class="panel form-panel" id="ticketFormPanel"><h2 id="formTitle">Report a problem</h2><p class="muted">Tell the support team what happened.</p><form id="ticketForm"><label>Problem type<select name="issue" required><option value="">Choose an issue</option><option>Wi-Fi not working</option><option>Computer / Lab issue</option><option>Projector issue</option><option>ID card issue</option><option>Classroom maintenance</option><option>Other</option></select></label><label>Location<input name="location" placeholder="e.g. Computer Lab 2" required></label><label>What happened?<textarea name="description" rows="3" placeholder="Describe the issue…" required minlength="5"></textarea></label><button class="btn btn-primary full">Submit request</button><button type="button" id="cancelEdit" class="btn btn-quiet full hidden">Cancel editing</button></form><div id="ticketMessage" class="message"></div></section>
+    <section class="panel announcements"><h2>Campus announcements</h2><div id="announcementList" class="announcement-list">Loading…</div></section></aside>
+  </div>
+</section>
+<section class="panel playground" id="playground">
+  <div class="section-head"><div><span class="eyebrow">LEARN BY DOING</span><h2>API Playground</h2><p class="muted">Send a real HTTP request and inspect the server's response.</p></div><span class="live-dot">LIVE API</span></div>
+  <div class="play-grid">
+    <div class="play-controls">
+      <label>HTTP method<select id="method"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select></label>
+      <label>Endpoint / URL<input id="endpoint" value="/api/announcements"></label>
+      <label>Query parameters<input id="query" placeholder="status=open&limit=10"></label>
+      <label>Request headers<textarea id="headers" rows="3" placeholder='{"X-API-Key":"your-key"}'></textarea></label>
+      <label>JSON request body<textarea id="body" rows="5" placeholder='{"issue":"Wi-Fi not working","description":"Cannot connect","location":"Lab 2"}'></textarea></label>
+      <button id="sendRequest" class="btn btn-dark full">▶ Send request</button>
+      <p class="tiny muted">Your login token is automatically attached when available. Add X-API-Key manually for the integration endpoint.</p>
+    </div>
+    <div class="response-area"><div class="response-top"><strong>Server response</strong><span id="responseStatus" class="status-pill">Waiting</span></div><pre id="responseOutput">Your response will appear here…</pre><div class="response-top"><strong>Request concepts</strong></div><div class="concept-chips"><span>Method</span><span>Path</span><span>Query</span><span>Headers</span><span>Body</span><span>Status code</span></div></div>
+  </div>
+</section>
+<footer>Campus Care · Built for learning HTTP, REST APIs and client-server communication</footer>
+</main>
+<div id="toast" class="toast"></div>
+<script src="/static/app.js"></script>
+</body></html>
